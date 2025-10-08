@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { userRoutes } from './routes/user.routes.js';
 
 // create a server
 const followerServer = new express();
@@ -20,3 +21,6 @@ checkDB.on('open', ()=> {
 checkDB.on('error', ()=> {
     console.log("MongoDB database connection is not successful")
 })
+
+// passing app into router
+userRoutes(followerServer)
