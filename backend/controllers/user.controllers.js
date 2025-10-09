@@ -50,3 +50,56 @@ export async function followUser(req, res) {
 
     return res.status(200).json({message: `${user.username} followed ${target.username}`});
 }
+
+// get followers and following
+export async function getUsers(req, res) {
+
+    try {
+        const userID = req.params.id;
+        // check user is coming or not
+        if (!userID) return res.status(404).json({message: "user id is missing"});
+
+        // check in the database
+        const userInfo = await userModel.findById(userID);
+        // if no user in the database
+        if (!userInfo) return res.status(404).json({message: "User not found!"})
+
+
+        // loop through the following array of the user and get the following users name  
+        const followingData = await Promise.all(
+            userInfo.following.map(async (item) => {
+                const data = await userModel.findById(item);
+                return {name: data.username} 
+            })
+        )
+
+        // loop through the follower array of the user and get the follower users name
+        const followersData = await Promise.all(
+            userInfo.followers.map(async (item) => {
+                const data = await userModel.findById(item);
+                return {name: data.username}
+            })
+        )
+
+        return res.status(200).json({
+            userInformation: userInfo, 
+            following: !followingData ? [] : followingData,
+            followers: !followersData ? [] : followersData
+        });    
+
+    }
+    catch(error) {
+        return res.status(500).json({error: error.message});
+    }
+}
+
+
+// var requestsPendingWithUsersData = await Promise.all(
+//   requestsPending.map(async (item) => {
+//     const userData = await User.findById(item.senderId);
+//     return {
+//       item,
+//       senderData: { picture: userData.picture, name: userData.username },
+//     };
+//   })
+// );
