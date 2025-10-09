@@ -92,14 +92,3 @@ export async function getUsers(req, res) {
         return res.status(500).json({error: error.message});
     }
 }
-
-
-// var requestsPendingWithUsersData = await Promise.all(
-//   requestsPending.map(async (item) => {
-//     const userData = await User.findById(item.senderId);
-//     return {
-//       item,
-//       senderData: { picture: userData.picture, name: userData.username },
-//     };
-//   })
-// );
