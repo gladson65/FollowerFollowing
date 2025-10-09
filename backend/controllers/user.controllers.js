@@ -52,7 +52,7 @@ export async function followUser(req, res) {
 }
 
 // get followers and following
-export async function getUsers(req, res) {
+export async function getUser(req, res) {
 
     try {
         const userID = req.params.id;
@@ -91,4 +91,20 @@ export async function getUsers(req, res) {
     catch(error) {
         return res.status(500).json({error: error.message});
     }
+}
+
+// get all users
+export async function getAllUsers(req, res) {
+
+    try {
+        const users = await userModel.find({});
+        // if no user insinde the database
+        if (!users) return res.status(400).json({message: 'No user found!'});
+
+        return res.status(200).json({message: users});
+    }
+    catch (error) {
+        return res.status(500).json({error: error.message});
+    }
+    
 }
