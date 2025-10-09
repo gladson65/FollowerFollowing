@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import { userRoutes } from './routes/user.routes.js';
 
 // create a server
@@ -10,6 +11,8 @@ followerServer.listen('7000', ()=> {
 
 // json parse middleware
 followerServer.use(express.json());
+// cors origin support
+followerServer.use(cors());
 
 // mongoDB connection
 mongoose.connect('mongodb://localhost:27017/followerData');
