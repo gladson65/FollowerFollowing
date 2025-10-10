@@ -1,0 +1,29 @@
+.users-div a {
+    text-decoration: none;
+}
+
+.users-div p {
+    width: 6rem;
+    height: 2rem;
+    padding: 2px;
+    border: 1px solid blueviolet;
+    border-radius: 7px;
+    text-align: center;
+    transition: all 7s ease-in;
+}
+
+.users-div p:hover {
+    cursor: pointer;
+    border: 2px solid red;
+    outline: 2px solid black;
+}
+
+.users-div {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 7px;
+}

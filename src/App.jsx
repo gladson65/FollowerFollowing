@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router'
 import './App.css'
 
 function App() {
@@ -31,14 +32,19 @@ function App() {
     <>
       <section className='users'>
         <h1>Users</h1>
-        {
-          users.length > 0 &&
-          users.map((user) => {
-            return (
-              <p key={user._id}>{user.username}</p>
-            )
-          })
-        }
+
+        <div className='users-div'>
+          {
+            users.length > 0 &&
+            users.map((user) => {
+              return (
+                <Link key={user._id} to={`/details/${user._id}`}>
+                  <p key={user._id}>{user.username}</p>
+                </Link>
+              )
+            })
+          }
+        </div>  
       </section>
     </>
   )

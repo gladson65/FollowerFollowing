@@ -14,7 +14,7 @@ const appRoute = createBrowserRouter([
   },
 
   {
-    path: "/details",
+    path: "/details/:id",
     element: <FollowFollower />
   }
 ])
