@@ -30,6 +30,7 @@ function App() {
   return (
     <>
       <section className='users'>
+        <h1>Users</h1>
         {
           users.length > 0 &&
           users.map((user) => {
